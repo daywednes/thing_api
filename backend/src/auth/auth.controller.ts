@@ -49,17 +49,15 @@ export class AuthController {
     @Body(ValidationPipe) weatherDto: WeatherDto,
   ): Promise<any> {
     let result = await this.authService.getOpenWeather(weatherDto);
-    console.log(result);
     return result;
   }
 
   @Get('/getCovidByLocation/:location')
-  @ApiOperation({ summary: 'Get Open Weather' })
+  @ApiOperation({ summary: 'Get Covid Location' })
   async getCovidByLocation(
     @Param('location') location: string
   ): Promise<any> {
     let result = await this.authService.getCovidByLocation(location);
-    console.log(result);
     return result;
   }
   
@@ -69,7 +67,6 @@ export class AuthController {
     @Param('zipCode') zipCode: number
   ): Promise<any> {
     let result = await this.authService.getOpenWeatherByZipCode(zipCode);
-    console.log(result);
     return result;
   }
 }
