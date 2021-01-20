@@ -2,8 +2,10 @@ import {
   Body,
   Controller,
   Post,
+  Get,
   UseGuards,
   ValidationPipe,
+  Param,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
@@ -47,6 +49,16 @@ export class AuthController {
     @Body(ValidationPipe) weatherDto: WeatherDto,
   ): Promise<any> {
     let result = await this.authService.getOpenWeather(weatherDto);
+    console.log(result);
+    return result;
+  }
+
+  @Get('/getCovidByLocation/:location')
+  @ApiOperation({ summary: 'Get Open Weather' })
+  async getCovidByLocation(
+    @Param('location') location: string
+  ): Promise<any> {
+    let result = await this.authService.getCovidByLocation(location);
     console.log(result);
     return result;
   }

@@ -2,10 +2,8 @@ db:
   host: "localhost"
   type: "mongodb"
   port: 5435
-  database: "taskmanagement"
+  database: "thing_api"
   synchronize: true
-  # username: 'postgres'
-  # password: '23071997'
   username: "thing_api"
   password: "Codelight123"
   mongourl: "mongodb://thing_api:Codelight123@cluster0-shard-00-00.nxuuk.mongodb.net:27017,cluster0-shard-00-01.nxuuk.mongodb.net:27017,cluster0-shard-00-02.nxuuk.mongodb.net:27017/thing_api?ssl=true&replicaSet=atlas-lg2imm-shard-0&authSource=admin&retryWrites=true&w=majority"
