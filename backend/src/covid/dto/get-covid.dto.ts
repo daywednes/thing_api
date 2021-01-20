@@ -1,14 +1,12 @@
 import { IsOptional } from 'class-validator';
 
-export class GetWeatherFilterDto {
+export class GetCovidFilterDto {
   @IsOptional()
-  cityName: string;
+  isoCode: string;
   @IsOptional()
   cityLat: string;
   @IsOptional()
   cityLon: string;
   @IsOptional()
-  country: string;
-  @IsOptional()
-  date: string;
+  countryOrRegion: string;
 }

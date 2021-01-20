@@ -8,15 +8,16 @@ import {
   UpdateDateColumn,
   Unique,
 } from "typeorm";
-@Entity("Weather")
-@Unique(['zipCode'])
-export class WeatherEntity extends BaseEntity {
+
+@Entity("Covid")
+@Unique(['isoCode'])
+export class CovidEntity extends BaseEntity {
   @ObjectIdColumn()
   readonly id: ObjectID;
   @Column()
-  zipCode: number;
+  isoCode: number;
   @Column()
-  cityName: string;
+  countryOrRegion: string;
   @Column()
   cityLat: string;
   @Column()
@@ -24,9 +25,19 @@ export class WeatherEntity extends BaseEntity {
   @Column()
   country: string;
   @Column()
-  date: string;
+  totalConfirmedCases: number;
   @Column()
-  listWeathers: [Object];
+  newlyConfirmedCases: number;
+  @Column()
+  totalDeaths: number;
+  @Column()
+  newDeaths: number;
+  @Column()
+  totalRecoveredCases: number;
+  @Column()
+  newlyRecoveredCases: number;
+  @Column()
+  syncDateTime: string;
   @CreateDateColumn({ type: "timestamp" })
   createdAt: Date;
 

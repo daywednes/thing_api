@@ -13,7 +13,6 @@ import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { GetUser } from './get-user.decorator';
 import { User } from './user.entity';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { WeatherDto } from './dto/weather.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -40,33 +39,5 @@ export class AuthController {
   @UseGuards(AuthGuard())
   test(@GetUser() user: User) {
     console.log(user);
-  }
-
-
-  @Post('/getOpenWeather')
-  @ApiOperation({ summary: 'Get Open Weather' })
-  async getOpenWeather(
-    @Body(ValidationPipe) weatherDto: WeatherDto,
-  ): Promise<any> {
-    let result = await this.authService.getOpenWeather(weatherDto);
-    return result;
-  }
-
-  @Get('/getCovidByLocation/:location')
-  @ApiOperation({ summary: 'Get Covid Location' })
-  async getCovidByLocation(
-    @Param('location') location: string
-  ): Promise<any> {
-    let result = await this.authService.getCovidByLocation(location);
-    return result;
-  }
-  
-  @Get('/getOpenWeatherByZipCode/:zipCode')
-  @ApiOperation({ summary: 'Get Open Weather' })
-  async getOpenWeatherByZipCode(
-    @Param('zipCode') zipCode: number
-  ): Promise<any> {
-    let result = await this.authService.getOpenWeatherByZipCode(zipCode);
-    return result;
   }
 }
