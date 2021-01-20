@@ -18,7 +18,7 @@ import { WeatherDto } from './dto/weather.dto';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   @Post('/signup')
   @ApiOperation({ summary: 'Register user account' })
@@ -42,7 +42,7 @@ export class AuthController {
     console.log(user);
   }
 
-  
+
   @Post('/getOpenWeather')
   @ApiOperation({ summary: 'Get Open Weather' })
   async getOpenWeather(
@@ -59,6 +59,16 @@ export class AuthController {
     @Param('location') location: string
   ): Promise<any> {
     let result = await this.authService.getCovidByLocation(location);
+    console.log(result);
+    return result;
+  }
+  
+  @Get('/getOpenWeatherByZipCode/:zipCode')
+  @ApiOperation({ summary: 'Get Open Weather' })
+  async getOpenWeatherByZipCode(
+    @Param('zipCode') zipCode: number
+  ): Promise<any> {
+    let result = await this.authService.getOpenWeatherByZipCode(zipCode);
     console.log(result);
     return result;
   }

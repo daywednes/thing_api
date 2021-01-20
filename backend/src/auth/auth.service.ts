@@ -66,6 +66,7 @@ export class AuthService {
     });
   }
 
+
   async getCovidByLocation(location: string): Promise<any> {
     const serverConfig = config.get('server');
     var unirest = require('unirest');
@@ -94,23 +95,54 @@ export class AuthService {
     });
   }
 
-  async signIn(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
-    const username = await this.userRepository.validateUserPassword(
-      authCredentialsDto,
-    );
+    async getOpenWeatherByZipCode(zipcode: number): Promise < any > {
+      const serverConfig = config.get('server');
+      var unirest = require('unirest');
 
-    if (!username) {
-      throw new UnauthorizedException('Invalid credentials');
+      var req = unirest("GET", "https://community-open-weather-map.p.rapidapi.com/forecast");
+
+      req.query({
+        "q": zipcode
+      });
+
+      req.headers({
+        'x-rapidapi-key': serverConfig.rapidapikey,
+        'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
+        useQueryString: true,
+      });
+
+      return new Promise(resolve => {
+        try {
+          req.end(function (res) {
+            if (res.error) {
+              resolve(res.error);
+            } else {
+              resolve(res.body);
+            }
+          });
+        } catch (error) {
+          resolve(error);
+        }
+      });
     }
 
-    const payload: JwtPayload = { username };
-    const accessToken = await this.jwtService.sign(payload);
-    this.logger.debug(
-      `Generated JWT Token with payload ${JSON.stringify(payload)}`,
-    );
+    async signIn(
+      authCredentialsDto: AuthCredentialsDto,
+    ): Promise < { accessToken: string } > {
+      const username = await this.userRepository.validateUserPassword(
+        authCredentialsDto,
+      );
 
-    return { accessToken };
+      if(!username) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+    const payload: JwtPayload = { username };
+      const accessToken = await this.jwtService.sign(payload);
+      this.logger.debug(
+        `Generated JWT Token with payload ${JSON.stringify(payload)}`,
+      );
+
+      return { accessToken };
+    }
   }
-}
