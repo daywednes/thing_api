@@ -1,0 +1,19 @@
+server:
+  origin: https://thing.surge.sh
+  autobahnConnection: ' ws://54.176.243.182:8090/ws'
+  publishTopic: 'com.myapp.addAvailableDevice'
+  publishTopicActivity: 'com.myapp.activity'
+  subscribeTopic: 'io.crossbar.demo.pubsub.404890'
+  subscribeTopicActivity: 'io.crossbar.demo.pubsub.404892'
+db:
+  host: 'simplethings-do-user-4182007-0.b.db.ondigitalocean.com'
+  type: 'postgres'
+  port: 25060
+  database: 'defaultdb'
+  synchronize: true
+  username: 'doadmin'
+  password: 'm3uion3zfz74g385'
+
+jwt:
+  expiresIn: 3600
+  secret: 'topSecret51'

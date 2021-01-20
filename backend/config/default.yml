@@ -1,0 +1,18 @@
+server:
+  port: 3000
+  mongourl: "mongodb+srv://thing_api:Codelight123@cluster0.nxuuk.mongodb.net/<dbname>?retryWrites=true&w=majority"
+  type: "mongodb"
+
+db:
+  host: "localhost"
+  type: "postgres"
+  port: 5432
+  database: "taskmanagement"
+  synchronize: true
+  # username: 'postgres'
+  # password: '23071997'
+  username: "thing_api"
+  password: "Codelight123"
+
+jwt:
+  expiresIn: 3600
