@@ -52,12 +52,17 @@ export class AuthService {
     });
 
     return new Promise(resolve => {
-      req.end(function (res) {
-        if (res.error) {
-          throw new NotFoundException(res.error);
-        }
-        resolve(res.body);
-      });
+      try {
+        req.end(function (res) {
+          if (res.error) {
+            resolve(res.error);
+          } else {
+            resolve(res.body);
+          }
+        });
+      } catch (error) {
+        resolve(error);
+      }
     });
   }
 
@@ -75,12 +80,17 @@ export class AuthService {
     });
 
     return new Promise(resolve => {
-      req.end(function (res) {
-        if (res.error) {
-          throw new NotFoundException(res.error);
-        }
-        resolve(res.body);
-      });
+      try {
+        req.end(function (res) {
+          if (res.error) {
+            resolve(res.error);
+          } else {
+            resolve(res.body);
+          }
+        });
+      } catch (error) {
+        resolve(error);
+      }
     });
   }
 
